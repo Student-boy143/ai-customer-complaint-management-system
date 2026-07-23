@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+/* Base application styles */
+body {
+  @apply m-0 min-h-screen bg-slate-50 text-slate-900 antialiased;
+}
+
+#root {
+  @apply min-h-screen;
+}
