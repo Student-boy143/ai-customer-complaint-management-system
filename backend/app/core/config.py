@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     # CORS — comma-separated origins in .env, e.g. http://localhost:5173
     cors_origins: List[str] = ["http://localhost:5173", "http://127.0.0.1:5173"]
 
-    # Database (configured in a future milestone)
+    # Database
     database_url: str = "mysql+pymysql://user:password@localhost:3306/complaints_db"
 
     # AI / Groq (configured in a future milestone)
