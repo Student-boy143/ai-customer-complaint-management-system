@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import appReducer from './slices/appSlice'
+import complaintsReducer from './slices/complaintsSlice'
 
 /**
  * Redux store configuration.
@@ -8,6 +9,7 @@ import appReducer from './slices/appSlice'
 export const store = configureStore({
   reducer: {
     app: appReducer,
+    complaints: complaintsReducer,
   },
   devTools: import.meta.env.DEV,
 })

@@ -8,18 +8,23 @@ Run with:
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from app.api import api_router
 from app.core.config import get_settings
+from app.core.exceptions import AppError
+from app.database import init_db
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Application lifespan — startup and shutdown hooks."""
     # Startup: initialize DB connections, AI clients, etc. in future milestones
+    init_db()
     yield
+    # Shutdown: clean up resources
     # Shutdown: clean up resources
 
 
@@ -46,6 +51,14 @@ def create_app() -> FastAPI:
 
     # Mount API routes under /api prefix
     app.include_router(api_router, prefix="/api")
+
+    @app.exception_handler(AppError)
+    async def app_error_handler(_request: Request, exc: AppError) -> JSONResponse:
+        """Convert domain exceptions into consistent JSON error responses."""
+        return JSONResponse(
+            status_code=exc.status_code,
+            content={"detail": exc.message},
+        )
 
     return app
 

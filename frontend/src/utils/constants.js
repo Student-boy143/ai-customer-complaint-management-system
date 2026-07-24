@@ -14,4 +14,5 @@ export const ROUTES = {
   HOME: '/',
   COMPLAINTS: '/complaints',
   NEW_COMPLAINT: '/new-complaint',
+  EDIT_COMPLAINT: '/complaints/:id/edit',
 }

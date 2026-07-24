@@ -75,3 +75,12 @@ class ComplaintSummary(ORMModel):
     priority: Optional[ComplaintPriority] = None
     created_at: datetime
     updated_at: datetime
+
+
+class ComplaintListResponse(ORMModel):
+    """Paginated list of complaint summaries."""
+
+    items: List[ComplaintSummary]
+    total: int
+    skip: int
+    limit: int

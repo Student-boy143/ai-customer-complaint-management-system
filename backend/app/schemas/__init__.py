@@ -4,6 +4,7 @@ from app.schemas.ai_log import AILogCreate, AILogResponse
 from app.schemas.attachment import AttachmentCreate, AttachmentResponse
 from app.schemas.complaint import (
     ComplaintCreate,
+    ComplaintListResponse,
     ComplaintResponse,
     ComplaintSummary,
     ComplaintUpdate,
@@ -16,6 +17,7 @@ __all__ = [
     "AttachmentCreate",
     "AttachmentResponse",
     "ComplaintCreate",
+    "ComplaintListResponse",
     "ComplaintResponse",
     "ComplaintSummary",
     "ComplaintUpdate",
