@@ -2,10 +2,11 @@
 
 from fastapi import APIRouter
 
-from app.api import complaints, health
+from app.api import complaints, health, upload
 
 api_router = APIRouter()
 
 # Register route modules
 api_router.include_router(health.router)
 api_router.include_router(complaints.router)
+api_router.include_router(upload.router)

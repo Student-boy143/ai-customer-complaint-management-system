@@ -1,6 +1,7 @@
 # FastAPI and server
 fastapi>=0.115.0
 uvicorn[standard]>=0.32.0
+python-multipart>=0.0.9
 
 # Settings and validation
 pydantic[email]>=2.10.0
@@ -13,6 +14,11 @@ pymysql>=1.1.1
 # AI (used in future milestones)
 langgraph>=0.2.0
 langchain-groq>=0.2.0
+
+# File upload and text extraction
+pdfplumber>=0.11.0
+pillow>=10.4.0
+pytesseract>=0.3.13
 
 # Utilities
 python-dotenv>=1.0.1
