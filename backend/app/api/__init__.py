@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter
 
-from app.api import complaints, health, upload
+from app.api import ai, complaints, health, upload
 
 api_router = APIRouter()
 
@@ -10,3 +10,4 @@ api_router = APIRouter()
 api_router.include_router(health.router)
 api_router.include_router(complaints.router)
 api_router.include_router(upload.router)
+api_router.include_router(ai.router)
