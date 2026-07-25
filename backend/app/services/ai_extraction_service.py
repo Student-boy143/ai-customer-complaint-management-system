@@ -26,12 +26,19 @@ class AIExtractionService:
         if not data.text or not data.text.strip():
             raise BadRequestError("Extracted text cannot be empty")
 
-    def normalize_response(self, payload: dict[str, Any]) -> dict[str, str]:
+    def normalize_response(self, payload: dict[str, Any]) -> dict[str, str | None]:
         schema = ExtractionResponse.model_fields
-        normalized: dict[str, str] = {}
+        normalized: dict[str, str | None] = {}
         for key in schema:
             value = payload.get(key, "")
-            normalized[key] = str(value).strip() if value is not None else ""
+            if key == "email":
+                if value is None:
+                    normalized[key] = None
+                else:
+                    text_value = str(value).strip()
+                    normalized[key] = text_value or None
+            else:
+                normalized[key] = str(value).strip() if value is not None else ""
         return normalized
 
     def extract(self, data: ExtractionRequest) -> ExtractionResponse:
@@ -63,6 +70,7 @@ class AIExtractionService:
         )
         return response_model
 
+
     def _log_result(
         self,
         *,
@@ -78,7 +86,7 @@ class AIExtractionService:
             log_entry = AILog(
                 complaint_id=complaint_id,
                 operation=AIOperationType.CATEGORIZATION,
-                model_name="gemma2-9b-it",
+                model_name="llama-3.3-70b-versatile",
                 input_payload=input_payload,
                 output_payload=output_payload,
                 is_success=success,

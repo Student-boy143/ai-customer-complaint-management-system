@@ -16,6 +16,7 @@ class ExtractionResponse(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     customer_name: str = ""
+    email: str | None = None
     product_name: str = ""
     product_strength: str = ""
     batch_number: str = ""

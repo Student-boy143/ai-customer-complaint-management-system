@@ -40,7 +40,13 @@ class ComplaintWorkflow:
         result = {}
         for field in expected_fields:
             value = payload.get(field, "")
-            if value is None or str(value).strip() == "":
+            if field == "email":
+                if value is None:
+                    result[field] = None
+                else:
+                    cleaned = str(value).strip()
+                    result[field] = cleaned or None
+            elif value is None or str(value).strip() == "":
                 result[field] = None
             else:
                 result[field] = str(value).strip()
